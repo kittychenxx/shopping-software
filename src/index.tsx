@@ -2,10 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './normalize.css';
 import App from './routers/index'
+import { Provider } from 'mobx-react'
+import store from './store'
 
 ReactDOM.render(
-  <React.StrictMode>
+  <Provider store={store}>
     <App/>
-  </React.StrictMode>,
+  </Provider>,
   document.getElementById('root')
 );
