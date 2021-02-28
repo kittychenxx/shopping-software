@@ -7,7 +7,7 @@ import Home from '../pages/Home/'
 
 // observer(()=>{})用来监控hooks组件
 // inject('存储store的属性名')() 是个高阶组件类似redux的connect
-// autorun, reaction都是用来对
+// autorun, reaction都是用来对store中某个数据变化进行响应的,更细粒度(推荐reaction)
 
 let PageHomeStore:IHomeType = new HomeStore()
 
