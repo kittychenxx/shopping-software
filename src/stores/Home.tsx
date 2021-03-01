@@ -15,8 +15,9 @@ class HomeStore{
   constructor(){
     makeObservable(this)
   }
-  @observable countCompute = countPlusStore
-  @observable colorChange = colorStore
+  // mobx做store合并的时候store对应的属性名不用被@observable修饰
+  countCompute = countPlusStore
+  colorChange = colorStore
   @observable pageName = 'Home页'
 }
 

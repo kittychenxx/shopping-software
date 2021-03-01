@@ -1,6 +1,7 @@
 import {
   action,
-  computed
+  computed,
+  runInAction
 } from 'mobx'
 import CountStore, {ICountType} from './count'
 
@@ -13,7 +14,11 @@ export interface ICountChangeType extends ICountType{
 class CountPlusStore extends CountStore {
   @action.bound
   addFive(){
-    this.count = this.count + 5
+    setTimeout(()=>{
+      runInAction(()=>{
+        this.count = this.count + 5
+      })
+    }, 2000)
   }
   @action.bound
   minusFive(){
