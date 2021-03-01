@@ -1,11 +1,20 @@
-import {observable, makeObservable} from 'mobx'
+import {
+  observable,
+  makeObservable,
+} from 'mobx'
 
-class HomeStore{
+export interface IUserInfoType{
+  email: string
+  password: string
+}
+
+class LoginStore {
   constructor(){
     makeObservable(this)
   }
-  @observable pageName = '登录页'
+  @observable username = ''
+  @observable password = ''
 }
 
-export default HomeStore
+export default LoginStore
 
