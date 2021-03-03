@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useState, useCallback, useRef} from 'react'
 import '../../sass/login.sass'
 import {Link, useHistory} from 'react-router-dom'
 import { Button, message } from 'antd'
@@ -43,22 +43,29 @@ function isForget(isForget: number|undefined){
 const CommonModel:React.FC<IModelType> = (props)=>{
   let {store} = props
   let [email, setEmail] = useState("")  
-  let [password, setPassword] = useState("")  
-  function isPassword(isPassword: number|undefined){
+  let [password, setPassword] = useState("") 
+  let pwd = useRef("")
+  pwd.current = password
+  // 这种没有依赖的函数可以用useCallback优化,永远不更新
+  const inputEmailChange = useCallback((e:any)=>{
+    setEmail(e.target.value)
+  },[])
+  const inputPasswordChange = useCallback((e:any)=>{
+    setPassword(e.target.value)
+  },[])
+  // 用下面这种方式优化,性能未必会提高
+  // useCallback优化,查看依赖变了创建新函数,没变返回函数缓存地址
+  // 不用useCallback优化,视图更新创建新的函数
+  // 创建函数的性能开销不一定比查看依赖是否变化了小
+  const isPassword = useCallback((isPassword: number|undefined)=>{
     if(isPassword){
       return <div className='login-input-container'>
         <label className='login-input-label'>Password</label>
-        <input value={password} type='password' onChange={inputPasswordChange} className='login-input'></input>
+        <input value={pwd.current} type='password' onChange={inputPasswordChange} className='login-input'></input>
       </div>
     }
-  }
-  function inputEmailChange(e:any){
-    setEmail(e.target.value)
-  }
-  function inputPasswordChange(e:any){
-    setPassword(e.target.value)
-  }
-
+  // 依赖的pwd是不变化的,useCallback对依赖进行浅比较,为何要使用useRef为了避免esLint对使用却不依赖的变量报警告
+  }, [inputPasswordChange, pwd])    
   let history = useHistory();
   function formSubmit(pageType: number, email: string, password: string):void{    
     let regEmail = /^([a-zA-Z]|[0-9])(\w|-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/
@@ -121,11 +128,10 @@ const CommonModel:React.FC<IModelType> = (props)=>{
           store.changeEmail('')
           history.push('/login')
         }else{message.error('修改失败,请重试')}
-      })
-      
+      })   
     }
   }
-
+  // 这个函数就不用useCallback优化
   function getEmailInput(pageType: number){    
     if(pageType === 3){
       return <input value={store.email} onChange={inputEmailChange} className='login-input'></input>
@@ -133,7 +139,7 @@ const CommonModel:React.FC<IModelType> = (props)=>{
       return <input value={email} onChange={inputEmailChange} className='login-input'></input>
     }
   }
-
+  // 这个useEffect需要用依赖,只要mounted执行就行,updated不需要执行
   useEffect(()=>{
     if(props.pageType === 3){
       if(store.email === ''){
@@ -143,7 +149,7 @@ const CommonModel:React.FC<IModelType> = (props)=>{
         }, 1000)
       }
     }
-  })
+  }, [props,store,history])
 
   return <div className='login-container'>
     <div className='login-box'>
