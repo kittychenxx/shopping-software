@@ -10,6 +10,7 @@ import {
   getEmailResult,
   getUpdatePwdResult
 } from '../../api/Xiqi'
+import {setCookie} from '../../components/Cookie'
 
 export interface IModelType{
   title: string
@@ -80,6 +81,8 @@ const CommonModel:React.FC<IModelType> = (props)=>{
         getLoginResult({email: email, password: password}).then(res=>{
           if(res){
             message.success('登录成功')
+            setCookie('isLogin', 1, 1 / (24 * 60))
+            setCookie('uname', email, 1 / (24 * 60))
             history.push('/')
           }else{
             message.error('用户信息不正确')
@@ -100,7 +103,7 @@ const CommonModel:React.FC<IModelType> = (props)=>{
         })
       }   
     }else if(pageType === 2){
-      getEmailResult({email: email}).then(res=>{
+      getEmailResult({email: email}).then(res=>{        
         if(res === 1){
           message.success('请输入新的密码')
           store.changeEmail(email)
