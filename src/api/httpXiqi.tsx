@@ -2,7 +2,7 @@ import axios from 'axios'
 import Qs from 'qs'
 
 let httpXiqi = axios.create({
-    baseURL: process.env.NODE_ENV === 'development' ? 'http://localhost:80/shopping/index.php' : 'http://localhost:80/shopping/index.php',
+    baseURL: process.env.NODE_ENV === 'development' ? 'http://localhost:8080/shopping/index.php' : 'http://localhost:80/shopping/index.php',
     headers: {
         "Content-Type": "application/x-www-form-urlencoded",
     },
@@ -10,15 +10,15 @@ let httpXiqi = axios.create({
     timeout: 1000
 });
 
-httpXiqi.interceptors.request.use(function(config){
+httpXiqi.interceptors.request.use(function (config) {
     return config
-}, function(error){
+}, function (error) {
     return Promise.reject(error)
 })
 
-httpXiqi.interceptors.response.use(function(response){
+httpXiqi.interceptors.response.use(function (response) {
     return response.data
-}, function(error){
+}, function (error) {
     return Promise.reject(error)
 })
 
