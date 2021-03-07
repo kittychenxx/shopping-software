@@ -1,10 +1,10 @@
 import React from 'react'
-import {useHistory} from 'react-router-dom'
-import {clearCookie} from '../../components/Cookie'
+import { useHistory } from 'react-router-dom'
+import { clearCookie } from '../../components/Cookie'
 
-const Shopping:React.FC = ()=>{
+const Shopping: React.FC = () => {
   let history = useHistory()
-  function loginOut(){
+  function loginOut() {
     clearCookie()
     history.push('/')
   }

@@ -12,7 +12,7 @@ const NotFound = React.lazy(() => import(/*webpackChunkName:"NotFound" */ '../co
 
 const App: React.FC = function () {
   return <BrowserRouter>
-    <Suspense fallback={<Loading/>}>
+    <Suspense fallback={<Loading />}>
       <Switch>
         <Route path='/login' component={Login}></Route>
         <Route path='/signup' component={SignUp}></Route>

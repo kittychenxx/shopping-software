@@ -11,15 +11,15 @@ let httpXiqi = axios.create({
     timeout: 1000
 });
 
-httpXiqi.interceptors.request.use(function(config){
+httpXiqi.interceptors.request.use(function (config) {
     return config
-}, function(error){
+}, function (error) {
     return Promise.reject(error)
 })
 
-httpXiqi.interceptors.response.use(function(response){
+httpXiqi.interceptors.response.use(function (response) {
     return response.data
-}, function(error){
+}, function (error) {
     return Promise.reject(error)
 })
 
