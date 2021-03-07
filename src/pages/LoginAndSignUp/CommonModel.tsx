@@ -54,6 +54,11 @@ const CommonModel: React.FC<IModelType> = (props) => {
     // console.log(e.target.name);  
     setEmail(e.target.value)
   }, [])
+  const keySubmit = (e:any)=>{
+    if(e.keyCode === 13){
+      formSubmit(props.pageType, store.email !== '' ? store.email : email, password)
+    }
+  }
   const inputPasswordChange = useCallback((e: any) => {
     setPassword(e.target.value)
   }, [])
@@ -61,15 +66,15 @@ const CommonModel: React.FC<IModelType> = (props) => {
   // useCallback优化,查看依赖变了创建新函数,没变返回函数缓存地址
   // 不用useCallback优化,视图更新创建新的函数
   // 创建函数的性能开销不一定比查看依赖是否变化了小
-  const isPassword = useCallback((isPassword: number | undefined) => {
+  const isPassword = (isPassword: number | undefined) => {
     if (isPassword) {
       return <div className='login-input-container'>
         <label className='login-input-label'>Password</label>
-        <input className='login-input' value={pwd.current} type='password' onChange={inputPasswordChange} ></input>
+        <input className='login-input' value={pwd.current} type='password' onChange={inputPasswordChange} onKeyDown={keySubmit}></input>
       </div>
     }
     // 依赖的pwd是不变化的,useCallback对依赖进行浅比较,为何要使用useRef为了避免esLint对使用却不依赖的变量报警告
-  }, [inputPasswordChange, pwd])
+  }
   let history = useHistory();
   function formSubmit(pageType: number, email: string, password: string): void {
     let regEmail = /^([a-zA-Z]|[0-9])(\w|-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/
@@ -136,11 +141,12 @@ const CommonModel: React.FC<IModelType> = (props) => {
   // 这个函数就不用useCallback优化
   function getEmailInput(pageType: number) {
     if (pageType === 3) {
-      return <input value={store.email} onChange={inputEmailChange} className='login-input'></input>
+      return <input value={store.email} onChange={inputEmailChange} className='login-input' onKeyDown={keySubmit}></input>
     }else{
-      return <input value={email} name='email' onChange={inputEmailChange} className='login-input'></input>
+      return <input value={email} name='email' onChange={inputEmailChange} className='login-input' onKeyDown={keySubmit}></input>
     }
   }
+
   // 这个useEffect需要用依赖,只要mounted执行就行,updated不需要执行
   useEffect(() => {
     if (props.pageType === 3) {
@@ -167,6 +173,7 @@ const CommonModel: React.FC<IModelType> = (props) => {
         </div>
         {isPassword(props.isPassword)}
         {isForget(props.isForget)}
+        {/* button不能监听onKeyDown input才可以 */}
         <button className='login-submit' onClick={() => { formSubmit(props.pageType, store.email !== '' ? store.email : email, password) }}>{props.submitText}</button>
       </div>
     </div>
