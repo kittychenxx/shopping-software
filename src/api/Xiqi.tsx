@@ -5,6 +5,11 @@ export interface ILoginParamsType{
   password?: string
 }
 
+// 获得一个随机数token
+export function getToken(){    
+  return httpXiqi.get('/Login/getRandom')
+}
+
 // 登录
 export function getLoginResult(params: ILoginParamsType){    
   return httpXiqi.post('/Login/', params)

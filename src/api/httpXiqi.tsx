@@ -6,6 +6,7 @@ let httpXiqi = axios.create({
     headers: {
         "Content-Type": "application/x-www-form-urlencoded",
     },
+    withCredentials: true,
     transformRequest: (data) => Qs.stringify(data),
     timeout: 1000
 });

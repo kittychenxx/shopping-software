@@ -5,12 +5,14 @@ import { Button, message } from 'antd'
 import {CloseOutlined} from '@ant-design/icons'
 import {IUserInfoType} from '../../stores/Login'
 import {
+  getToken,
   getLoginResult, 
   getSignUpResult,
   getEmailResult,
   getUpdatePwdResult
 } from '../../api/Xiqi'
 import {setCookie} from '../../components/Cookie'
+import md5 from 'js-md5'
 
 export interface IModelType{
   title: string
@@ -48,6 +50,8 @@ const CommonModel:React.FC<IModelType> = (props)=>{
   pwd.current = password
   // 这种没有依赖的函数可以用useCallback优化,永远不更新
   const inputEmailChange = useCallback((e:any)=>{
+    // 可以通过e.target.propsName来获取受控组件的属性值
+    // console.log(e.target.name);  
     setEmail(e.target.value)
   },[])
   const inputPasswordChange = useCallback((e:any)=>{
@@ -82,33 +86,30 @@ const CommonModel:React.FC<IModelType> = (props)=>{
       return
     }
     if(pageType === 0){
-      if(email==='' || password===''){
-        message.error('邮箱或密码不能为空')
-      }else{
-        getLoginResult({email: email, password: password}).then(res=>{
+      getToken().then(res=>{
+        let token = res;
+        password = md5(md5(password) + token + '二层加密应该更加复杂')
+        getLoginResult({email: email, password: password}).then(res=>{                       
           if(res){
             message.success('登录成功')
             setCookie('isLogin', 1, 1 / (24 * 60))
             setCookie('uname', email, 1 / (24 * 60))
             history.push('/')
           }else{
-            message.error('用户信息不正确')
+            message.error('用户信息不正确')  
           }
-        })
-      }
+        })    
+      })
     }else if(pageType === 1){
-      if(email==='' || password===''){
-        message.error('邮箱或密码不能为空')
-      }else{
-        getSignUpResult({email: email, password: password}).then(res=>{                
-          if(res){
-            message.success('注册成功')
-            history.push('/login')
-          }else{
-            message.warning('email已经注册过了')
-          }          
-        })
-      }   
+      password = md5(password)
+      getSignUpResult({email: email, password: password}).then(res=>{                
+        if(res){
+          message.success('注册成功')
+          history.push('/login')
+        }else{
+          message.warning('email已经注册过了')
+        }          
+      })   
     }else if(pageType === 2){
       getEmailResult({email: email}).then(res=>{        
         if(res === 1){
@@ -120,6 +121,7 @@ const CommonModel:React.FC<IModelType> = (props)=>{
         }     
       })
     }else if(pageType === 3){
+      password = md5(password)
       getUpdatePwdResult({email: email, password: password}).then(res=>{
         if(res === 0){
           message.info('新密码与旧密码相同')
@@ -136,7 +138,7 @@ const CommonModel:React.FC<IModelType> = (props)=>{
     if(pageType === 3){
       return <input value={store.email} onChange={inputEmailChange} className='login-input'></input>
     }else{
-      return <input value={email} onChange={inputEmailChange} className='login-input'></input>
+      return <input value={email} name='email' onChange={inputEmailChange} className='login-input'></input>
     }
   }
   // 这个useEffect需要用依赖,只要mounted执行就行,updated不需要执行
