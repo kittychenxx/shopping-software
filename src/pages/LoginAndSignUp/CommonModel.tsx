@@ -97,9 +97,9 @@ const CommonModel: React.FC<IModelType> = (props) => {
         getLoginResult({email: email, password: password}).then(res=>{                       
           if(res){
             message.success('登录成功')
-            setCookie('isLogin', 1, 1 / (24 * 60))
-            setCookie('uname', email, 1 / (24 * 60))
-            history.push('/')
+            setCookie('isLogin', 1, 1 / (24))
+            setCookie('uname', email, 1 / (24))
+            history.push('/index')
           }else{
             message.error('用户信息不正确')  
           }
@@ -173,7 +173,7 @@ const CommonModel: React.FC<IModelType> = (props) => {
         </div>
         {isPassword(props.isPassword)}
         {isForget(props.isForget)}
-        {/* button不能监听onKeyDown input才可以 */}
+        {/* button不能监听onKeyDown input才可以 因为监听事件需要聚焦,button聚焦的时候就已经被click了 */}
         <button className='login-submit' onClick={() => { formSubmit(props.pageType, store.email !== '' ? store.email : email, password) }}>{props.submitText}</button>
       </div>
     </div>

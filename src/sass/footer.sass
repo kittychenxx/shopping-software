@@ -1,0 +1,83 @@
+.footer-container
+  height: 497px
+  display: flex
+  flex-direction: column
+  
+  > .footer-contact-container
+    flex: 1
+    background-color: #121212
+    display: flex
+    justify-content: center
+    color: #fff
+
+    > .main-content
+      width: 784px
+      display: flex
+      flex-wrap: wrap
+      padding-top: 55px
+      font-size: 17px
+      font-weight: 500
+      align-content: flex-start
+
+      > .content-left,.content-middle, .content-right
+        margin: 0
+        margin-bottom: 68px
+        padding: 0
+        list-style: none
+        flex: 1
+        line-height: 1.8em
+
+      > .footer-subscribe
+        width: 100%
+        height: 170px
+
+        > p
+          font-weight: 300
+
+        > label
+          color: #999997
+          display: block
+          margin-bottom: 9px
+
+        .sub-input-container
+          display: flex
+
+          input::-webkit-input-placeholder 
+            color: #fff
+
+          > .sub-input
+            width: 583px
+            height: 38px
+            border: none
+            outline: none
+            background-color: #121212
+            border-bottom: 3px solid #fff
+            box-sizing: border-box
+            margin-right: 17px
+            padding: 3px 3px 3px 21px
+            font-weight: 500
+
+          > .sub-btn
+            width: 166px
+            height: 38px
+            background-color: #fff
+            outline: none
+            border: none
+            color: #121212
+            font-weight: 500
+            cursor: pointer
+            transition: background-color .5s, color .5s
+
+            &:hover
+              background-color: rgb(14, 62, 155)
+              color: #fff
+
+  > .footer-copyright
+    flex: 0 0 44px
+    background-color: #999997
+    display: flex
+    justify-content: center
+    align-items: center
+    font-size: 17px
+    color: #121212
+    font-weight: 700

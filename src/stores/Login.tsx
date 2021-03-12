@@ -6,7 +6,7 @@ import {
 
 export interface IUserInfoType{
   email: string
-  password: string
+  password?: string
   changeEmail: (email: string)=>void
 }
 
@@ -15,7 +15,6 @@ class LoginStore {
     makeObservable(this)
   }
   @observable email = ''
-  @observable password = ''
   
   @action.bound
   changeEmail(email: string){

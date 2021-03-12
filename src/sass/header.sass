@@ -1,0 +1,111 @@
+@mixin hover
+  cursor: pointer
+  &:hover
+    color: #999997
+
+a
+  color: #121212
+  &:hover
+    color: #999997
+
+.header-container
+  position: fixed
+  z-index: 1
+  top: 0
+  padding: 30px 60px 20px
+  display: flex
+  justify-content: space-between
+  color: #121212
+  width: 100%
+  min-width: 1280px
+  max-width: 1920px
+  background-color: #fff
+
+  > .header-left-title
+    flex: 0 0 300px
+    display: flex
+    flex-direction: column
+    justify-content: space-between
+    align-items: flex-start
+    
+    > .header-logo
+      font-size: 47px
+      margin: 0
+      line-height: 50px
+      font-weight: 600
+      @include hover    
+
+    > .header-logo-des
+      font-size: 17px
+      font-weight: 600
+      margin: 0
+      line-height: 20px
+      @include hover    
+
+  > .header-middle-list
+    flex: 1
+    height: 70px
+
+    > .header-list-item
+      margin: 0
+      padding: 0
+      // align-items必须要height才可以生效
+      height: 100%
+      list-style: none
+      display: flex
+      justify-content: center
+      align-items: center
+
+      > li
+        font-size: 17px
+        padding: 0 15px
+        height: 50px
+        line-height: 50px
+        font-weight: 600
+        @include hover
+
+      > li.header-list-item-active
+        color: #999997    
+
+  > .header-right-select
+    flex: 0 0 300px
+    display: flex
+    align-items: center
+
+    > .header-right-list
+      flex: 1
+      font-size: 22px
+      list-style: none
+      display: flex
+      justify-content: flex-start
+      margin: 0
+      padding: 0
+
+      > li
+        flex: 0 0 40px
+        display: flex
+        justify-content: flex-end
+        align-items: center
+        @include hover
+
+      > .header-login
+        flex: 0 0 90px
+        display: flex
+        margin-right: auto
+
+        .header-loginOut-container
+          flex: 1
+          display: flex
+          align-items: center
+          @include hover
+
+        > a
+          flex: 1
+          display: flex
+          align-items: center
+          @include hover
+
+        .header-login-text
+          font-size: 17px
+          font-weight: 600
+          margin-left: 5px

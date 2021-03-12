@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './normalize.css';
 import App from './routers/index'
 import {configure} from 'mobx'
 import zhCN from 'antd/lib/locale/zh_CN';

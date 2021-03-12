@@ -1,17 +1,18 @@
 import React from 'react'
-import { useHistory } from 'react-router-dom'
-import { clearCookie } from '../../components/Cookie'
+import Header from '../../components/Header'
+import '../../sass/shopping/shopping.sass'
+import HeaderStore from '../../models/Shopping/Header'
+import About from '../Shopping/About'
+import Footer from '../../components/Footer'
 
 const Shopping: React.FC = () => {
-  let history = useHistory()
-  function loginOut() {
-    clearCookie()
-    history.push('/')
-  }
-  return <>
-    <h1>shopping</h1>
-    <button onClick={loginOut}>登出</button>
-  </>
+  return <div className="box">
+    <Header pageType={HeaderStore.type} changePageType={HeaderStore.changeType}/>
+    <main className="shopping-main-content">
+      <About></About>
+    </main>
+    <Footer></Footer>
+  </div>
 }
 
 export default Shopping
