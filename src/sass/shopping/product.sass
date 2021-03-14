@@ -1,0 +1,99 @@
+.goods-item
+  width: 25%
+  padding: 10px
+  display: flex
+  flex-direction: column
+  position: relative
+  cursor: pointer
+
+  > .image-container
+    width: 100%
+    // 实现宽高相等的方式
+    padding-top: 100%
+    position: relative
+
+    > .image-content
+      position: absolute
+      width: 100%
+      height: 100%
+      top: 0
+      overflow: hidden
+      background-position: center
+      background-repeat: no-repeat
+      transition: all .7s
+
+      > .image-info
+        width: 100%
+        height: 50px
+        background: red
+        position: absolute
+        bottom: -50px
+        background-color: #ffffffbf
+        display: flex
+        justify-content: center
+        align-items: center
+        font-weight: 700
+        font-size: 14px
+        transition: all .7s
+
+  > .goods-mark
+    padding: 5px 10px
+    font-size: 16px
+    line-height: 1.375
+    background-color: #121212
+    color: #fff
+    display: flex
+    justify-content: center
+    align-items: center
+    font-weight: 700
+    position: absolute
+    top: 10px
+
+  > .goods-text-container
+    width: 100%
+    height: 79px
+    padding: 15px 46px 0
+    display: flex
+    flex-direction: column
+    align-items: center
+
+    > h3
+      font-weight: 700
+      margin: 0
+
+    > hr
+      width: 20px
+      border-top: 1px solid #121212
+      border-bottom: none
+
+    > span
+      font-size: 17px
+      font-weight: 700
+
+  > .Add-to-Cart-container
+    width: 100%
+    height: 96px
+    padding: 0 46px 46px
+    background-color: red
+    visibility: hidden
+    transition: all .7s
+
+    > .Add-to-Cart
+      width: 100%
+      height: 38px
+      display: flex
+      justify-content: center
+      align-items: center
+      background-color: #121212
+      color: #fff
+      margin-top: 20px
+      font-weight: 700
+      font-size: 15px
+          
+  &:hover
+    .image-content        
+      > .image-info
+        bottom: 0
+
+    .Add-to-Cart
+      visibility: visible

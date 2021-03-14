@@ -1,8 +1,27 @@
 import React, { useState } from 'react'
 import '../sass/footer.sass'
+import {getSubscribeResult} from '../api/Xiqi'
+import {emailTest} from './Reg'
+import { message } from 'antd'
 
 const Footer: React.FC = () => {
   let [ipt, setIpt] = useState("")
+
+  const subscribe = ()=>{
+    if(!emailTest(ipt)){
+      message.error("邮箱格式不正确")
+      return
+    }
+    getSubscribeResult({email: ipt}).then(res=>{
+      if(res === 1){
+        message.success("订阅成功!!!")
+      }else if(res === 0){
+        message.warn("该邮箱已经订阅过了")
+      }else if(res === -1){
+        message.error("订阅失败,请重试")
+      }
+    })
+  }
 
   return <footer className="footer-container">
     <div className="footer-contact-container">
@@ -27,7 +46,7 @@ const Footer: React.FC = () => {
           <label>Email</label>
           <div className="sub-input-container">
             <input value={ipt} onChange={(e)=>{setIpt(e.target.value)}} placeholder="Enter your email here*" className='sub-input'></input>
-            <button className="sub-btn">Subscribe Now</button>
+            <button className="sub-btn" onClick={subscribe}>Subscribe Now</button>
           </div>
         </div>
       </div>

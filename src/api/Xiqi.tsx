@@ -26,3 +26,8 @@ export function getEmailResult(params: ILoginParamsType) {
 export function getUpdatePwdResult(params: ILoginParamsType) {
   return httpXiqi.post('/Login/updatePwd', params)
 }
+
+// 订阅
+export function getSubscribeResult(params: {email: string}) {
+  return httpXiqi.post('/Index/subscribe', params)
+}

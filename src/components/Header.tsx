@@ -85,10 +85,11 @@ const Header: React.FC<IHeaderPropsType> = (props: IHeaderPropsType) => {
               <span className="header-login-text" onClick={loginOut}>Log Out</span>
             </span>
             : 
-            <Link to="/login">
+            // 这块不能用Link只能用a标签,效率会低一点。如果用Link则需要把/login /signup等这些全部在子路由再写一遍
+            <a href="/login">
               <UserOutlined />
               <span className="header-login-text">Log In</span>
-            </Link>
+            </a>
           }
         </li>
         <li>

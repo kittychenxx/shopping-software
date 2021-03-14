@@ -13,6 +13,7 @@ import {
 } from '../../api/Xiqi'
 import {setCookie} from '../../components/Cookie'
 import md5 from 'js-md5'
+import {emailTest,passwordTest} from '../../components/Reg'
 
 export interface IModelType {
   title: string
@@ -36,8 +37,9 @@ function Transfer(transferText: string | undefined, transferTo: string | undefin
 
 function isForget(isForget: number | undefined) {
   if (isForget) {
+    let a = '/forgetPassword'
     return <div className='forget-password'>
-      <Link className='forget-text' to='/forgetPassword'>Forget password</Link>
+      <Link className='forget-text' to={a}>Forget password</Link>
     </div>
   }
 }
@@ -77,16 +79,11 @@ const CommonModel: React.FC<IModelType> = (props) => {
   }
   let history = useHistory();
   function formSubmit(pageType: number, email: string, password: string): void {
-    let regEmail = /^([a-zA-Z]|[0-9])(\w|-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/
-    let reg1 = /^[0-9a-zA-Z]{6,16}$/
-    let reg2 = /[0-9]+/
-    let reg3 = /[a-z]+/
-    let reg4 = /[A-Z]+/
-    if (!regEmail.test(email)) {
+    if (!emailTest(email)) {
       message.warning('邮箱格式不正确')
       return
     }
-    if ((!(reg1.test(password) && reg2.test(password) && reg3.test(password) && reg4.test(password))) && (pageType !== 2)) {
+    if ((!passwordTest(password)) && (pageType !== 2)) {
       message.warning('密码必须包含大写字母,小写字母,数字,且长度是6-16位')
       return
     }
