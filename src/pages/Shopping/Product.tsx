@@ -6,6 +6,7 @@ interface IProps{
   backgroundHover: string
   productName: string
   price: string
+  toggleModel: any
   markText?: string
 }
 
@@ -19,7 +20,7 @@ const ProductItem: React.FC<IProps> = (props) => {
   return <li className="goods-item" onMouseEnter={toggleHover} onMouseLeave={toggleHover}>
     <div className="image-container">
       <div className="image-content" style={hoverStyle}>
-        <div className="image-info">Quick View</div>
+        <div className="image-info" onClick={props.toggleModel}>Quick View</div>
       </div>
     </div>
     {

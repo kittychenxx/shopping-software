@@ -1,10 +1,11 @@
-import React from 'react'
+import React, {useState} from 'react'
 import Header from '../../components/Header'
 import '../../sass/shopping/shopping.sass'
 import HeaderStore from '../../models/Shopping/Header'
 import About from '../Shopping/About'
 import Footer from '../../components/Footer'
 import ProductItem from './Product'
+import ViewQuick from './ViewQuick'
 
 const Shopping: React.FC = () => {
   let goods = [
@@ -47,9 +48,16 @@ const Shopping: React.FC = () => {
       price: "15.00",
     }
   ]
-  let viewHeight = document.documentElement.clientHeight
-  let quickShowAreaStyle = viewHeight > 750 ? {marginTop: "130px"} : {}
-  
+  let [modelStyle, setModelStyle] = useState({display: "none"})
+  let [modelDislay, setModelDisplay] = useState(true)
+  const toggleModelDisplay = ()=>{
+    setModelDisplay(!modelDislay)
+    if(modelDislay){
+      setModelStyle({display: "block"})
+    }else{
+      setModelStyle({display: "none"})
+    }
+  } 
   return <div className="box">
     <Header pageType={HeaderStore.type} changePageType={HeaderStore.changeType}/>
     <main className="shopping-main-content">
@@ -57,7 +65,15 @@ const Shopping: React.FC = () => {
         <ul className="goods-list">
           {
             goods.map(item=>{
-              return <ProductItem key={item.id} background={item.backgroundImg} markText={item.markText} backgroundHover={item.backgroundHover} productName={item.productName} price={item.price}></ProductItem>
+              return <ProductItem 
+                key={item.id} 
+                background={item.backgroundImg} 
+                markText={item.markText} 
+                backgroundHover={item.backgroundHover} 
+                productName={item.productName} 
+                price={item.price}
+                toggleModel={toggleModelDisplay}>
+              </ProductItem>
             })
           }
         </ul>
@@ -65,18 +81,10 @@ const Shopping: React.FC = () => {
       <About></About>
     </main>
     <Footer></Footer>
-    <div className="shopping-mask">
-      <div className="quick-view-container" style={quickShowAreaStyle}>
-        <div className="img-show-area">
-          <img alt="这放产品的名子" src="https://static.wixstatic.com/media/45d10e_15641be40e0c43d89f5426f8949b51bd~mv2.jpg/v1/fill/w_492,h_492,al_c,q_85,usm_0.66_1.00_0.01/45d10e_15641be40e0c43d89f5426f8949b51bd~mv2.webp"></img>
-          <div className="img-switch-dot">
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
-        </div>
-      </div>
-    </div>
+    <ViewQuick 
+      modelStyle={modelStyle}
+      toggleModelDisplay={toggleModelDisplay}>
+    </ViewQuick>
   </div>
 }
 

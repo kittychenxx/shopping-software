@@ -1,0 +1,189 @@
+.shopping-mask
+  width: 100%
+  height: 100vh
+  position: fixed
+  top: 0
+  background-color: rgba(85,85,85,.75)
+  z-index: 2
+
+  > .quick-view-container
+    width: 940px
+    height: 620px
+    padding: 32px
+    background: #fff
+    margin: 0 auto
+    overflow: hidden
+    display: flex
+    position: relative
+
+    > .img-show-area
+      flex: 0 0 492px
+
+      > img
+        width: 492px
+        height: 492px
+      
+      > .img-switch-dot
+        width: 100%
+        height: 40px
+        padding: 24px 0 0
+        display: flex
+        line-height: 16px
+        justify-content: center
+        align-items: center
+
+        > span
+          width: 8px
+          height: 8px
+          border-radius: 50%
+          background-color: #121212
+          cursor: pointer
+          transition: all .2s ease
+
+          &:hover
+            opacity: 1
+
+        > span ~ span
+          margin-left: 8px
+          opacity: .4
+
+    > .goods-quick-view
+      flex: 1
+      margin-left: 32px
+      height: 100%
+
+      > h1
+        color: #575757
+        margin-bottom: 12px
+
+      > .quickView-price-sku
+        display: flex
+        flex-direction: column
+
+        > .price
+          font-size: 20px
+          color: #575757
+          font-weight: 500
+          line-height: 1
+          margin-bottom: 18px
+
+        > .sku
+          font-size: 12px
+          color: #999997
+          font-weight: 500
+          line-height: 25px
+
+      > .quickView-color-quantity
+        width: 100%
+        height: 191px
+        margin: 8px 0 0
+        padding: 20px 0 32px
+        box-sizing: content-box
+
+        > .color-label, .quantity-label
+          font-size: 16px
+          color: #121212
+          font-weight: 700
+
+        > .color-list
+          margin: 0
+          padding: 0
+          list-style: none
+          display: flex
+          height: 33px
+          align-items: center
+
+          > li
+            width: 26px
+            height: 26px
+            display: flex
+            align-items: center
+            justify-content: center
+            margin-right: 2px
+            cursor: pointer
+            border-radius: 50%
+
+            &:hover
+              opacity: .75
+
+            > span
+              display: block
+              width: 20px
+              height: 20px
+              line-height: 20px
+              border-radius: 50%
+
+        > .quantity-label
+          margin: 20px 0 8px 0
+          display: block
+
+        > .quantity-select
+          width: 77px
+          position: relative
+
+          > .goods-number-ipt
+            width: 77px
+            height: 41px
+            border: 1px solid #c9c9c9
+            color: #575757
+            padding: 1px 28px 1px 14px
+
+            &:focus
+              outline: none
+
+          > .goodNum-control
+            display: flex
+            flex-direction: column
+            position: absolute
+            height: 40px
+            right: 5px
+            top: 0
+            cursor: pointer
+            display: none
+
+            > span
+              display: block
+              height: 20px
+              color: #575757
+              font-size: 10px
+          
+          &:hover
+            .goodNum-control
+              display: block
+
+      > .quick-view-addToCart
+        height: 44px
+        display: flex
+        margin-right: 16px
+        justify-content: center
+        align-items: center
+        background-color: #121212
+        color: #fff
+        font-weight: 700
+        font-size: 15px
+        cursor: pointer
+        transition: .2s linear
+
+        &:hover
+          background-color: rgba(18, 18, 18, 0.7)
+          color: rgba(255, 255, 255, 0.7)
+
+      > .view-more-details
+        font-weight: bold
+        font-size: 14px
+        margin-top: 16px
+        display: block
+        text-decoration: underline
+
+    > .goods-select-close
+      width: 16px
+      height: 16px
+      top: 16px
+      right: 16px
+      display: flex
+      justify-content: center
+      align-items: center
+      position: absolute
+
+      &:hover
+        background-color: transparent
