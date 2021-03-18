@@ -2,7 +2,8 @@ import axios from 'axios'
 import Qs from 'qs'
 
 let httpXiqi = axios.create({
-    baseURL: process.env.NODE_ENV === 'development' ? 'http://localhost:80/shopping/index.php' : 'http://localhost:80/shopping/index.php',
+    // baseURL: process.env.NODE_ENV === 'development' ? 'http://localhost:80/shopping/index.php' : 'http://localhost:80/shopping/index.php',
+    baseURL: "http://127.0.0.1:9000",
     headers: {
         "Content-Type": "application/x-www-form-urlencoded",
     },

@@ -6,6 +6,7 @@ import About from '../Shopping/About'
 import Footer from '../../components/Footer'
 import ProductItem from './Product'
 import ViewQuick from './ViewQuick'
+import TestMock from './TestMock'
 
 const Shopping: React.FC = () => {
   let goods = [
@@ -85,6 +86,7 @@ const Shopping: React.FC = () => {
       modelStyle={modelStyle}
       toggleModelDisplay={toggleModelDisplay}>
     </ViewQuick>
+    <TestMock></TestMock>
   </div>
 }
 

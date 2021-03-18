@@ -31,3 +31,11 @@ export function getUpdatePwdResult(params: ILoginParamsType) {
 export function getSubscribeResult(params: {email: string}) {
   return httpXiqi.post('/Index/subscribe', params)
 }
+
+// 测试本地mock
+export function getMockResult() {
+  return httpXiqi.get('/test/info')
+}
+export function getMockPostResult(params: {name: string}) {
+  return httpXiqi.post('/test/postInfo', params)
+}
