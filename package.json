@@ -55,7 +55,7 @@
     "customize-cra": "^1.0.0",
     "mobx": "^6.1.7",
     "mobx-react": "^7.1.0",
-    "node-sass": "^5.0.0",
+    "node-sass": "^7.0.0",
     "react-app-rewired": "^2.1.8"
   }
 }
